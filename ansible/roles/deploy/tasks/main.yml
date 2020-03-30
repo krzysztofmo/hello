@@ -1,0 +1,41 @@
+---
+- name: Set timestamp fact
+  set_fact:
+    fact_timestamp: "{{ lookup('pipe', 'date -u +%Y-%m-%d__%H-%M-%S') }}"
+
+- name: Rsync local to remote cache
+  synchronize:
+    src: "../{{ dir_rsync_cache }}/_build/{{ mix_env }}/rel/kx_widget/"
+    dest: "{{ dir_deploy_to }}/shared/deploy-{{ansible_user_id}}"
+    delete: yes
+    set_remote_user: no
+    rsync_opts:
+      - "--exclude=*.tar.gz"
+      - "-O"
+    # Workaround for an unresolved bug in ansible
+    # https://github.com/ansible/ansible/issues/29698
+    rsync_path: "sudo -u webapp rsync"
+
+- block:
+
+  - name: Copy remote cache to releases
+    command: cp -aL {{ dir_deploy_to }}/shared/deploy-{{ ansible_user_id }} {{ dir_deploy_to }}/releases/{{ fact_timestamp }}__{{ ansible_user_id }}
+
+  - name: Symlink new version
+    file:
+      src: "{{ dir_deploy_to }}/releases/{{ fact_timestamp }}__{{ ansible_user_id }}"
+      dest: "{{ dir_deploy_to }}/current"
+      state: link
+      force: yes
+
+  become: yes
+  become_user: webapp
+
+  always:
+
+    - name: Get name of the current release, example "2018-08-30__08-43-29__mczarnecki"
+      command: bash -c "basename `readlink {{ dir_deploy_to }}/current`"
+      register: name_of_current_release
+
+    - name: Remove all releases except 5 most recent ones and except the currently symlinked one
+      command: bash -c 'ls --directory -t {{dir_deploy_to}}/releases/* | tail -n +6 | grep --invert-match {{name_of_current_release.stdout}} | xargs rm -rf'

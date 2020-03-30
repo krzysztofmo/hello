@@ -1,0 +1,26 @@
+---
+# We cannot use ansible systemd module here because it won't fit sudoers commands
+# See https://gist.github.com/kabturek/83ec82753f70d17c79b15a0e8a2d0982 for details
+- name: Restart the server
+  shell: sh -c "sudo /bin/systemctl restart webapp.service"
+
+- name: Wait for port 8080 to become open
+  wait_for:
+    host: localhost
+    port: 8080
+    delay: 1
+    timeout: 20
+
+- name: Check that path /isItWorking returns a status 200...
+  uri:
+    url: https://{{ inventory_hostname }}/isItWorking
+    return_content: yes
+    status_code: 200
+    validate_certs: "{{ validate_app_cert }}"
+  delegate_to: 127.0.0.1
+  register: webpage
+
+- name: ...and fail if *I am working* is not in the page contents
+  fail:
+    msg: "Service is not responding"
+  when: "'I am working.' not in webpage.content"

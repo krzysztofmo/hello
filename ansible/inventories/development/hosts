@@ -1,0 +1,9 @@
+[all:vars]
+validate_app_cert=False
+
+[local]
+127.0.0.1 ansible_python_interpreter=python2
+
+[kx_widget]
+signin1.dev.in.kontomatik.com
+signin2.dev.in.kontomatik.com
