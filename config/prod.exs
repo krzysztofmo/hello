@@ -21,6 +21,8 @@ config :hello, HelloWeb.Endpoint,
   ],
   cache_static_manifest: "priv/static/cache_manifest.json"
 
+config :hello, HelloWeb.Endpoint, secret_key_base: "${SECRET_KEY_BASE}"
+
 # Do not print debug messages in production
 config :logger,
   backends: [{LoggerFileBackend, :prod_log}],
@@ -67,4 +69,4 @@ config :logger,
 
 # Finally import the config/prod.secret.exs which loads secrets
 # and configuration from environment variables.
-import_config "prod.secret.exs"
+# import_config "prod.secret.exs"
