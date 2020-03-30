@@ -9,10 +9,3 @@
     version: "{{ branch }}"
     force: "true"
   register: head_hash
-
-- name: Set revision
-  local_action:
-    module: lineinfile
-    path: ../{{ dir_rsync_cache }}/config/config.exs
-    regexp: 'release:'
-    line: 'release: "{{ head_hash.after }}"'
