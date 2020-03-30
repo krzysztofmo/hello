@@ -1,0 +1,11 @@
+---
+- hosts: local
+  connection: local
+  roles:
+    - clone
+    - build
+
+- hosts: kx_widget
+  roles:
+    - deploy
+    - restart

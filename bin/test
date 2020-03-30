@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+DIR=${PWD##*/}
+docker exec -it ${DIR//_/}_test_app_1 mix test $@

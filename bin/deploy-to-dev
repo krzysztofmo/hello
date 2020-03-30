@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+if [ "$#" -lt 1 ]; then
+    echo "You must provide a branch name to deploy"
+else
+  ansible-playbook --inventory-file=ansible/inventories/development ansible/deploy.yml --extra-vars "branch=$1" "${@:2}"
+fi

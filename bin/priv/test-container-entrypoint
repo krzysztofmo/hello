@@ -1,0 +1,15 @@
+#!/bin/bash
+
+echo ""
+echo "Test container started! Enter it from a second terminal with:"
+echo "bin/enter-test-container"
+echo "Then run tests as usual:"
+echo "mix test"
+if [[ -z "${RUN_TEST_WATCH}" ]]
+then
+  echo "Starting test.watch to run test continuously when files change"
+  mix test.watch --stale
+else
+  echo "To run tests continuously run 'export RUN_TEST_WATCH=true'"
+fi
+sleep infinity
