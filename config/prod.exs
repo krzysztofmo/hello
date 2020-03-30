@@ -10,12 +10,27 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :hello, HelloWeb.Endpoint,
-  url: [host: "example.com", port: 80],
+  url: [host: "${HOST}", port: 443, scheme: "https"],
+  server: true,
+  http: [
+   port: {:system, "HTTP_PORT"},
+   ip: {127, 0, 0, 1},
+   protocol_options: [
+     idle_timeout: 5 * 60_000
+   ]
+  ],
   cache_static_manifest: "priv/static/cache_manifest.json"
 
 # Do not print debug messages in production
-config :logger, level: :info
-
+config :logger,
+  backends: [{LoggerFileBackend, :prod_log}],
+  prod_log: [
+   path: "${LOG_PATH}",
+   format: "$date $time $metadata[$level]$levelpad $message\n",
+   metadata: [:request_id, :request_ip, :user_id, :user_agent]
+  ],
+  level: :info,
+  utc_log: true
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key

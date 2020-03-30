@@ -42,3 +42,12 @@ hello-*.tar
 ## Plugin-specific files:
 # IntelliJ
 /out
+
+#####################
+# Kontomatik deployment script
+
+## Path, which contains project files rsynced to server
+/.rsync_cache
+
+##
+deploy.retry
