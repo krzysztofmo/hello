@@ -16,3 +16,5 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
   * Docs: https://hexdocs.pm/phoenix
   * Forum: https://elixirforum.com/c/phoenix-forum
   * Source: https://github.com/phoenixframework/phoenix
+
+    env `grep -h "^\s*[A-Z]\{1,\}" /etc/default/webapp* | xargs` bundle exec  bin/rails c production

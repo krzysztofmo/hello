@@ -9,6 +9,7 @@ function leave_running {
 }
 
 mix deps.get || leave_running
+(cd assets && yarn install) || leave_running
 mix phx.server || leave_running
 
 # The "-smp disable" is necessary in Erlang <19 due to "being a PID 1" bug in BEAM

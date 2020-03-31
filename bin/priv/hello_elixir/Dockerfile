@@ -103,7 +103,7 @@ RUN \
     && rm $DOCKERIZE_PACKAGE_NAME
 
 # Inotify is necessary to allow hot reloading (no need to refresh the browser to see html edits)
-RUN apt-get install -y inotify-tools postgresql-client
+RUN apt-get install -y inotify-tools
 # == /DEV ======================================================================================================
 
 ENV TZ=Europe/Warsaw

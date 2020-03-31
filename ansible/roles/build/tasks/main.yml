@@ -5,11 +5,11 @@
 - name: (Elixir) Compile
   local_action: shell docker exec -i {{ docker_app }} bash -c "cd {{ dir_rsync_cache }} && MIX_ENV={{ mix_env }} mix compile"
 
-#- name: (JavaScript) Get node modules (yarn install)
-#  local_action: shell docker exec -i {{ docker_app }} bash -c "cd {{ dir_rsync_cache }}/assets && yarn install"
-#
-#- name: (JavaScript) Build assets
-#  local_action: shell docker exec -i {{ docker_app }} bash -c "cd {{ dir_rsync_cache }}/assets && yarn build-prod"
+- name: (JavaScript) Get node modules (yarn install)
+  local_action: shell docker exec -i {{ docker_app }} bash -c "cd {{ dir_rsync_cache }}/assets && yarn install"
+
+- name: (JavaScript) Build assets
+  local_action: shell docker exec -i {{ docker_app }} bash -c "cd {{ dir_rsync_cache }}/assets && yarn build-prod"
 
 - name: Digest assets
   local_action: shell docker exec -i {{ docker_app }} bash -c "cd {{ dir_rsync_cache }} && MIX_ENV={{ mix_env }} mix phx.digest"

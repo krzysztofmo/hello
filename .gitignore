@@ -44,6 +44,23 @@ hello-*.tar
 /out
 
 #####################
+# Node
+# Based on: https://github.com/github/gitignore/blob/master/Node.gitignore
+
+# Dependency directories
+/assets/node_modules
+/assets/.npm
+
+# Spritesmith artifacts
+/assets/spritesmith-generated
+
+# Logs
+npm-debug.log*
+
+# Optional eslint cache
+.eslintcache
+
+#####################
 # Kontomatik deployment script
 
 ## Path, which contains project files rsynced to server
