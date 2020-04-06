@@ -17,4 +17,4 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
   * Forum: https://elixirforum.com/c/phoenix-forum
   * Source: https://github.com/phoenixframework/phoenix
 
-    env `grep -h "^\s*[A-Z]\{1,\}" /etc/default/webapp* | xargs` bundle exec  bin/rails c production
+    sudo -i -u webapp env `grep -h "^\s*[A-Z]\{1,\}" /etc/default/webapp* | xargs` /data/webapp/public/current/bin/kx_widget console

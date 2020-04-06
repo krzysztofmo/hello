@@ -25,7 +25,7 @@ defmodule Hello.MixProject do
 
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "test/support"]
-  defp elixirc_paths(_), do: ["lib"]
+  defp elixirc_paths(_), do: ["lib", "rel/lib"]
 
   # Specifies your project dependencies.
   #
@@ -40,6 +40,7 @@ defmodule Hello.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:logger_file_backend, "~> 0.0.10"},
       {:distillery, "~> 2.0"},
+      {:libcluster, "~> 3.2"}
     ]
   end
 end

@@ -1,12 +1,8 @@
-## This file provide the arguments provided to the VM at startup
-## You can find a full list of flags and their behaviours at
-## http://erlang.org/doc/man/erl.html
-
 ## Name of the node
--name <%= release_name %>@127.0.0.1
+-name ${NODE_NAME}
 
 ## Cookie for distributed erlang
--setcookie <%= release.profile.cookie %>
+-setcookie ${NODE_COOKIE}
 
 ## Heartbeat management; auto-restarts VM if it dies or becomes unresponsive
 ## (Disabled by default..use with caution!)
@@ -15,9 +11,6 @@
 ## Enable kernel poll and a few async threads
 ##+K true
 ##+A 5
-## For OTP21+, the +A flag is not used anymore,
-## +SDio replace it to use dirty schedulers
-##+SDio 5
 
 ## Increase number of concurrent ports/sockets
 ##-env ERL_MAX_PORTS 4096
@@ -26,5 +19,19 @@
 ##-env ERL_FULLSWEEP_AFTER 10
 
 # Enable SMP automatically based on availability
-# On OTP21+, this is not needed anymore.
 -smp auto
+
+# Disable epmd completely, all nodes use DIST_PROTO_PORT port to communicate
+-start_epmd false
+-kernel inet_dist_listen_min ${DIST_PROTO_PORT} inet_dist_listen_min ${DIST_PROTO_PORT}
+
+# Since we don't use epmd, we must tell Erlang what ports are used for distribution.
+#
+-epmd_module Elixir.Epmdless
+
+## Specifies TLS distribution module for net_kernel
+# https://erlang.org/doc/apps/ssl/ssl_distribution.html
+-proto_dist inet_tls
+-ssl_dist_opt server_certfile ${SERVER_CERTFILE} server_keyfile ${SERVER_KEYFILE}
+-ssl_dist_opt server_secure_renegotiate true
+-ssl_dist_opt client_secure_renegotiate true
