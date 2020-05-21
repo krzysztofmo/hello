@@ -1,0 +1,29 @@
+## Customize flags given to the VM: http://erlang.org/doc/man/erl.html
+## Heartbeat management; auto-restarts VM if it dies or becomes unresponsive
+## (Disabled by default..use with caution!)
+##-heart
+
+## Enable kernel poll and a few async threads
+##+K true
+##+A 5
+
+## Increase number of concurrent ports/sockets
+##-env ERL_MAX_PORTS 4096
+
+## Tweak GC to run more often
+##-env ERL_FULLSWEEP_AFTER 10
+
+## Enable SMP automatically based on availability
+-smp auto
+
+## Disable epmd completely, all nodes use DIST_PROTO_PORT port to communicate with each other
+-start_epmd false
+
+## Since epmd is disabled, we use custom module for node lookup
+-epmd_module Elixir.Hello.Epmdless
+
+## Specifies TLS distribution module for net_kernel
+## https://erlang.org/doc/apps/ssl/ssl_distribution.html
+-proto_dist inet_tls
+-ssl_dist_opt server_secure_renegotiate true
+-ssl_dist_opt client_secure_renegotiate true

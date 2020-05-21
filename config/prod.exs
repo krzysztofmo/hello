@@ -1,4 +1,4 @@
-use Mix.Config
+import Config
 
 # For production, don't forget to configure the url host
 # to something meaningful, Phoenix uses this information
@@ -21,7 +21,7 @@ config :hello, HelloWeb.Endpoint,
   ],
   cache_static_manifest: "priv/static/cache_manifest.json"
 
-config :hello, HelloWeb.Endpoint, secret_key_base: "${SECRET_KEY_BASE}"
+#config :hello, HelloWeb.Endpoint, secret_key_base: "${SECRET_KEY_BASE}"
 
 #hosts = ("${CLUSTER_NODES}" |> String.split(",") |> Enum.map(&String.to_atom(&1)))
 #
@@ -41,15 +41,15 @@ config :hello, HelloWeb.Endpoint, secret_key_base: "${SECRET_KEY_BASE}"
 #       ]
 
 # Do not print debug messages in production
-config :logger,
-  backends: [{LoggerFileBackend, :prod_log}],
-  prod_log: [
-   path: "${LOG_PATH}",
-   format: "$date $time $metadata[$level]$levelpad $message\n",
-   metadata: [:request_id, :request_ip, :user_id, :user_agent]
-  ],
-  level: :info,
-  utc_log: true
+#config :logger,
+#  backends: [{LoggerFileBackend, :prod_log}],
+#  prod_log: [
+#   path: "${LOG_PATH}",
+#   format: "$date $time $metadata[$level]$levelpad $message\n",
+#   metadata: [:request_id, :request_ip, :user_id, :user_agent]
+#  ],
+#  level: :info,
+#  utc_log: true
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key

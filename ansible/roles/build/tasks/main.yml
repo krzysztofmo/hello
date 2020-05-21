@@ -18,4 +18,4 @@
   local_action: shell docker exec -i {{ docker_app }} bash -c "cd {{ dir_rsync_cache }} && rm -rf _build/prod/rel"
 
 - name: Create a release (_build/prod/rel)
-  local_action: shell docker exec -i {{ docker_app }} bash -c "cd {{ dir_rsync_cache }} && MIX_ENV={{ mix_env }} mix distillery.release --env={{ mix_env }}"
+  local_action: shell docker exec -i {{ docker_app }} bash -c "cd {{ dir_rsync_cache }} && MIX_ENV={{ mix_env }} mix release"

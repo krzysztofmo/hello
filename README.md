@@ -18,3 +18,4 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
   * Source: https://github.com/phoenixframework/phoenix
 
     sudo -i -u webapp env `grep -h "^\s*[A-Z]\{1,\}" /etc/default/webapp* | xargs` /data/webapp/public/current/bin/kx_widget console
+    sudo -i -u webapp env `grep -h "^\s*[A-Z]\{1,\}" /etc/default/webapp* | grep -v 'GOOGLE' | xargs` /data/webapp/public/current/bin/kx_widget start_iex

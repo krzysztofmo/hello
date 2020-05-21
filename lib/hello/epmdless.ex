@@ -1,4 +1,4 @@
-defmodule Epmdless do
+defmodule Hello.Epmdless do
   # erl_distribution wants us to start a worker process.  We don't
   # need one, though.
   def start_link do
