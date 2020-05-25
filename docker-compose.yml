@@ -1,16 +1,16 @@
 version: '2'
 services:
   dev_app:
-    build: ./bin/priv/hello_elixir
+    build: .
     image: hello_elixir
     ports:
       - "127.0.0.1:8080:8080"
     volumes:
-    - .:/app:rw
-    - $SSH_AUTH_SOCK:/ssh-agent
+    - .:/opt/app:rw
+#    - $SSH_AUTH_SOCK:/ssh-agent
     environment:
-      MIX_ENV: dev
+#      MIX_ENV: dev
       MIX_DEBUG: 0
       HTTP_PORT: 8080
-      SSH_AUTH_SOCK: /ssh-agent
-    command: bin/priv/dev-container-entrypoint
+#      SSH_AUTH_SOCK: /ssh-agent
+#    command: ./kubernetes/entrypoint.sh
