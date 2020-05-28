@@ -80,6 +80,7 @@ ENV \
   HTTP_PORT=8080 \
   HTTPS_PORT=8443 \
   HOST=localhost \
+  RELEASE_DISTRIBUTION=none \
   SECRET_KEY_BASE=XwkLekxMaHijVecozKRk8RdtiM4nYQCHSwY8kP5WgUyla1S1Pfrg5cnHh3R3xsVN
 
 RUN \
@@ -95,12 +96,14 @@ RUN \
   apk update \
   && apk add --no-cache bash
 
-# Do not run as root
-USER ${APP_USER}
-
 WORKDIR ${APP_DIR}
 
 # Copy the release created in the Build Stage
 COPY --from=builder --chown=${APP_USER}:${APP_USER} ${APP_DIR}/_build/${MIX_ENV}/rel/${APP_NAME} .
+
+RUN chown ${APP_USER}:${APP_USER} .
+
+# Do not run as root
+USER ${APP_USER}
 
 CMD ["/opt/app/bin/hello", "start"]
