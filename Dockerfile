@@ -78,7 +78,9 @@ ENV \
   TZ=Europe/Warsaw \
   PS1A="docker:\[\$(tput setaf 2)\]\$(pwd)\[\$(tput sgr0)\]:\[\$(tput setaf 3)\]kxwidget-\$MIX_ENV\[\$(tput sgr0)\]\$ " \
   HTTP_PORT=8080 \
-  HTTPS_PORT=8443
+  HTTPS_PORT=8443 \
+  HOST=localhost \
+  SECRET_KEY_BASE=XwkLekxMaHijVecozKRk8RdtiM4nYQCHSwY8kP5WgUyla1S1Pfrg5cnHh3R3xsVN
 
 RUN \
   ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
@@ -99,6 +101,6 @@ USER ${APP_USER}
 WORKDIR ${APP_DIR}
 
 # Copy the release created in the Build Stage
-COPY --from=builder ${APP_DIR}/_build/${MIX_ENV}/rel/${APP_NAME} .
+COPY --from=builder --chown=${APP_USER}:${APP_USER} ${APP_DIR}/_build/${MIX_ENV}/rel/${APP_NAME} .
 
 CMD ["/opt/app/bin/hello", "start"]
