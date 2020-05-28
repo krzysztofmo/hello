@@ -18,12 +18,3 @@
 
 ## Disable epmd completely, all nodes use DIST_PROTO_PORT port to communicate with each other
 -start_epmd false
-
-## Since epmd is disabled, we use custom module for node lookup
--epmd_module Elixir.Hello.Epmdless
-
-## Specifies TLS distribution module for net_kernel
-## https://erlang.org/doc/apps/ssl/ssl_distribution.html
--proto_dist inet_tls
--ssl_dist_opt server_secure_renegotiate true
--ssl_dist_opt client_secure_renegotiate true

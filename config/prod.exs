@@ -23,23 +23,6 @@ config :hello, HelloWeb.Endpoint,
 
 #config :hello, HelloWeb.Endpoint, secret_key_base: "${SECRET_KEY_BASE}"
 
-#hosts = ("${CLUSTER_NODES}" |> String.split(",") |> Enum.map(&String.to_atom(&1)))
-#
-#IO.puts "hosts: #{inspect hosts}"
-#
-#config :hello,
-#  cluster_nodes: "${CLUSTER_NODES}"
-#
-#config :libcluster,
-#       topologies: [
-#         kx_widget: [
-#           strategy: Cluster.Strategy.Epmd,
-#           config: [
-##             hosts: ("${CLUSTER_NODES}" |> String.split("") |> Enum.map(&String.to_atom(&1)))
-#           ],
-#         ]
-#       ]
-
 # Do not print debug messages in production
 #config :logger,
 #  backends: [{LoggerFileBackend, :prod_log}],

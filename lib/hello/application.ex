@@ -6,11 +6,8 @@ defmodule Hello.Application do
   use Application
 
   def start(_type, _args) do
-    topologies =  Application.get_env(:libcluster, :topologies, [])
-
     # List all child processes to be supervised
     children = [
-      {Cluster.Supervisor, [topologies, [name: Hello.ClusterSupervisor]]},
       # Start the endpoint when the application starts
       HelloWeb.Endpoint
       # Starts a worker by calling: Hello.Worker.start_link(arg)
