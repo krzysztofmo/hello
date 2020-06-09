@@ -10,11 +10,10 @@ import Config
 # which you should run after static files are built and
 # before starting your production server.
 config :hello, HelloWeb.Endpoint,
-  url: [host: "${HOST}", port: 443, scheme: "https"],
   server: true,
   http: [
    port: {:system, "HTTP_PORT"},
-   ip: {127, 0, 0, 1},
+#   ip: {127, 0, 0, 1},
    protocol_options: [
      idle_timeout: 5 * 60_000
    ]

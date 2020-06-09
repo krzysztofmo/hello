@@ -19,3 +19,8 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
 
     sudo -i -u webapp env `grep -h "^\s*[A-Z]\{1,\}" /etc/default/webapp* | xargs` /data/webapp/public/current/bin/kx_widget console
     sudo -i -u webapp env `grep -h "^\s*[A-Z]\{1,\}" /etc/default/webapp* | grep -v 'GOOGLE' | xargs` /data/webapp/public/current/bin/kx_widget start_iex
+    
+    
+    docker build -t hello-elixir .
+    docker run --rm -p 127.0.0.1:8080:8080 -it hello-elixir
+    

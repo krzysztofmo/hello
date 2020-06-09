@@ -71,21 +71,11 @@ ARG APP_USER
 ARG APP_DIR
 ARG MIX_ENV
 
-# Set up build environment
-ENV \
-  LANG=C.UTF-8 \
-  TERM=xterm \
-  TZ=Europe/Warsaw \
-  PS1A="docker:\[\$(tput setaf 2)\]\$(pwd)\[\$(tput sgr0)\]:\[\$(tput setaf 3)\]kxwidget-\$MIX_ENV\[\$(tput sgr0)\]\$ " \
-  HTTP_PORT=8080 \
-  HTTPS_PORT=8443 \
-  HOST=localhost \
-  RELEASE_DISTRIBUTION=none \
-  SECRET_KEY_BASE=XwkLekxMaHijVecozKRk8RdtiM4nYQCHSwY8kP5WgUyla1S1Pfrg5cnHh3R3xsVN
-
 RUN \
-  ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
-  && echo "export PS1=\$PS1A" >> ~/.bashrc
+  apk update \
+  && apk add --no-cache bash \
+  && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
+  && echo $TZ > /etc/timezone
 
 RUN \
   addgroup --system ${APP_USER} \
@@ -93,17 +83,35 @@ RUN \
   && addgroup ${APP_USER} ${APP_USER}
 
 RUN \
-  apk update \
-  && apk add --no-cache bash
+  mkdir -p ${APP_DIR} \
+  && chown ${APP_USER}:${APP_USER} ${APP_DIR}
 
 WORKDIR ${APP_DIR}
-
-# Copy the release created in the Build Stage
-COPY --from=builder --chown=${APP_USER}:${APP_USER} ${APP_DIR}/_build/${MIX_ENV}/rel/${APP_NAME} .
-
-RUN chown ${APP_USER}:${APP_USER} .
 
 # Do not run as root
 USER ${APP_USER}
 
-CMD ["/opt/app/bin/hello", "start"]
+# Set up runtime environment
+ENV \
+  LANG=C.UTF-8 \
+  TERM=xterm \
+  TZ=Europe/Warsaw \
+  PS1A="docker:\[\$(tput setaf 2)\]\$(pwd)\[\$(tput sgr0)\]:\[\$(tput setaf 3)\]kxwidget-\$MIX_ENV\[\$(tput sgr0)\]\$ " \
+  LOG_PATH=${APP_DIR}/log \
+  HTTP_PORT=8080 \
+  HTTPS_PORT=8443 \
+  HOST=localhost \
+  RELEASE_DISTRIBUTION=none \
+  RELEASE_NODE=elixr@elixir \
+  SECRET_KEY_BASE=XwkLekxMaHijVecozKRk8RdtiM4nYQCHSwY8kP5WgUyla1S1Pfrg5cnHh3R3xsVN
+
+RUN echo "export PS1=\$PS1A" >> ~/.bashrc
+
+EXPOSE ${HTTP_PORT}
+#EXPOSE 8080
+
+# Copy the release created in the Build Stage
+COPY --from=builder --chown=${APP_USER}:${APP_USER} ${APP_DIR}/_build/${MIX_ENV}/rel/${APP_NAME}/ .
+
+# Start the application
+CMD ["bin/hello", "start"]

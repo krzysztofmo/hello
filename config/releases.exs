@@ -1,9 +1,9 @@
 import Config
 
-config :hello, HelloWeb.Endpoint,
-       url: [host: System.get_env("HOST"), port: 443, scheme: "https"]
+#config :hello, HelloWeb.Endpoint,
+#       url: [host: System.get_env("HOST"), port: 443, scheme: "https"]
 
-config :hello,
+config :hello, HelloWeb.Endpoint,
        secret_key_base: System.get_env("SECRET_KEY_BASE")
 
 # Do not print debug messages in production
