@@ -1,0 +1,43 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: hello-elixir-deployment
+  name: hello-elixir-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-elixir-deployment
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: hello-elixir-deployment
+    spec:
+      containers:
+        - image: gcr.io/hello-elixir-278607/hello-elixir:v1
+          name: hello-elixir
+          resources: {}
+
+#
+#
+#
+#apiVersion: v1
+#kind: Pod
+#metadata:
+#  name: hello-elixir
+#  labels:
+#    app.kubernetes.io/name: hello
+#    app.kubernetes.io/instance: wordpress-abcxzy
+#    app.kubernetes.io/version: "0.0.1"
+#    app.kubernetes.io/component: application
+#    app.kubernetes.io/part-of: kontomatik
+#    app.kubernetes.io/managed-by: helm
+#spec:
+#  containers:
+#    - name: hello-elixir-app
+#      image: gcr.io/hello-elixir-278607/hello-elixir
+#      ports:
+#        - containerPort: 8080
