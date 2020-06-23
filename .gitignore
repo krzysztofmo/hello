@@ -1,31 +1,41 @@
-# The directory Mix will write compiled artifacts to.
-/_build/
+#####################
+# Elixir
+# Source: https://github.com/github/gitignore/blob/master/Elixir.gitignore
 
-# If you run "mix test --cover", coverage assets end up here.
-/cover/
-
-# The directory Mix downloads your dependencies sources to.
-/deps/
-
-# Where 3rd-party dependencies like ExDoc output generated docs.
-/doc/
-
-# Ignore .fetch files in case you like to edit your project deps locally.
-/.fetch
-
-# If the VM crashes, it generates a dump, let's ignore it too.
+/_build
+/cover
+/deps
+/.hex
+/.mix
 erl_crash.dump
-
-# Also ignore archive artifacts (built via "mix archive.build").
 *.ez
+*.beam
 
-# Ignore package tarball (built via "mix hex.build").
-hello-*.tar
+log/*.log
 
-# Since we are building assets from assets/,
-# we ignore priv/static. You may want to comment
+
+#####################
+# Phoenix Framework
+# Reference: https://github.com/phoenixframework/phoenix/blob/master/.gitignore
+
+/db
+/tmp
+/installer/_build
+/installer/tmp
+
+# Since we are building assets from web/static, we ignore priv/static. You may want to comment
 # this depending on your deployment strategy.
 /priv/static/
+
+# The config/prod.secret.exs file by default contains sensitive
+# data and you should not commit it into version control.
+#
+# Alternatively, you may comment the line below and commit the
+# secrets file as long as you replace its contents by environment
+# variables.
+/config/dev.secret.exs
+/config/prod.secret.exs
+/config/test.secret.exs
 
 #####################
 # JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm
@@ -40,6 +50,7 @@ hello-*.tar
 *.iml
 
 ## Plugin-specific files:
+
 # IntelliJ
 /out
 
@@ -56,15 +67,19 @@ hello-*.tar
 
 # Logs
 npm-debug.log*
+assets/**/*.log
 
 # Optional eslint cache
 .eslintcache
 
 #####################
-# Kontomatik deployment script
+# Ansible
 
-## Path, which contains project files rsynced to server
 /.rsync_cache
+/ansible/*.retry
+ansible/.rsync_cache
 
-##
-deploy.retry
+#####################
+# Visual Studio Code
+
+.elixir_ls

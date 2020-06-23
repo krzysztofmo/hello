@@ -1,19 +1,10 @@
 #**/*
 #!./bin/priv/*
 
-_build/
-deps/
-.git/
-.gitignore
-Dockerfile
-README*
-test/
-priv/static/
-
-
 .git
 .idea
 .rsync_cache
+.gitignore
 .dockerignore
 
 ansible
@@ -32,3 +23,6 @@ is
 s
 t
 u
+Dockerfile
+erl_crash.dump
+README.md

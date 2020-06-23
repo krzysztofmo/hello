@@ -20,6 +20,15 @@ spec:
         - image: gcr.io/hello-elixir-278607/hello-elixir:v1
           name: hello-elixir
           resources: {}
+          env:
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            - name: NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
 
 #
 #

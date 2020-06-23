@@ -71,6 +71,14 @@ ARG APP_USER
 ARG APP_DIR
 ARG MIX_ENV
 
+ENV \
+  LANG=C.UTF-8 \
+  TERM=xterm \
+  TZ=Europe/Warsaw \
+  PS1A="docker:\[\$(tput setaf 2)\]\$(pwd)\[\$(tput sgr0)\]:\[\$(tput setaf 3)\]kxwidget-\$MIX_ENV\[\$(tput sgr0)\]\$ "
+
+RUN echo "export PS1=\$PS1A" >> ~/.bashrc
+
 RUN \
   apk update \
   && apk add --no-cache bash \
@@ -93,10 +101,6 @@ USER ${APP_USER}
 
 # Set up runtime environment
 ENV \
-  LANG=C.UTF-8 \
-  TERM=xterm \
-  TZ=Europe/Warsaw \
-  PS1A="docker:\[\$(tput setaf 2)\]\$(pwd)\[\$(tput sgr0)\]:\[\$(tput setaf 3)\]kxwidget-\$MIX_ENV\[\$(tput sgr0)\]\$ " \
   LOG_PATH=${APP_DIR}/log \
   HTTP_PORT=8080 \
   HTTPS_PORT=8443 \
@@ -104,8 +108,6 @@ ENV \
   RELEASE_DISTRIBUTION=none \
   RELEASE_NODE=elixr@elixir \
   SECRET_KEY_BASE=XwkLekxMaHijVecozKRk8RdtiM4nYQCHSwY8kP5WgUyla1S1Pfrg5cnHh3R3xsVN
-
-RUN echo "export PS1=\$PS1A" >> ~/.bashrc
 
 EXPOSE ${HTTP_PORT}
 #EXPOSE 8080

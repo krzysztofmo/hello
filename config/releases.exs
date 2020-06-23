@@ -1,9 +1,9 @@
 import Config
 
-#config :hello, HelloWeb.Endpoint,
-#       url: [host: System.get_env("HOST"), port: 443, scheme: "https"]
-
 config :hello, HelloWeb.Endpoint,
+       url: [host: System.get_env("HOST"), port: 443, scheme: "https"]
+
+config :hello,
        secret_key_base: System.get_env("SECRET_KEY_BASE")
 
 # Do not print debug messages in production
@@ -16,3 +16,16 @@ config :hello, HelloWeb.Endpoint,
 #       ],
 #       level: :info,
 #       utc_log: true
+
+config :libcluster,
+       topologies: [
+         hello: [
+           strategy: Cluster.Strategy.Epmd,
+           config: [
+             hosts: System.get_env("CLUSTER_NODES", "") |> String.split(",") |> Enum.map(&String.to_atom(&1))
+           ],
+         ]
+       ]
+
+config :epmdless,
+       dist_proto_port: System.get_env("DIST_PROTO_PORT")
