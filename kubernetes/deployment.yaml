@@ -3,21 +3,22 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: hello-elixir-deployment
-  name: hello-elixir-deployment
+    app: hello-elixir
+  name: hello-elixir
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
-      app: hello-elixir-deployment
+      app: hello-elixir
   strategy: {}
   template:
     metadata:
       labels:
-        app: hello-elixir-deployment
+        app: hello-elixir
     spec:
       containers:
         - image: gcr.io/hello-elixir-278607/hello-elixir:v1
+          imagePullPolicy: Always
           name: hello-elixir
           resources: {}
           env:
@@ -29,6 +30,8 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
+            - name: HOST
+              value: hello.jackal.pw
 
 #
 #

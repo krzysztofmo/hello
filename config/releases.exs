@@ -20,12 +20,14 @@ config :logger,
 config :libcluster,
        topologies: [
          hello: [
-           strategy: Cluster.Strategy.Epmd,
+           strategy: Cluster.Strategy.Kubernetes,
            config: [
-             hosts: System.get_env("CLUSTER_NODES", "") |> String.split(",") |> Enum.map(&String.to_atom(&1))
+             mode: :ip,
+             kubernetes_node_basename: "dupa",
+             kubernetes_selector: "app=hello-elixir"
            ],
          ]
        ]
-
-config :epmdless,
-       dist_proto_port: System.get_env("DIST_PROTO_PORT")
+#
+#config :epmdless,
+#       dist_proto_port: System.get_env("DIST_PROTO_PORT")
