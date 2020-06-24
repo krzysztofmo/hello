@@ -1,6 +1,8 @@
 defmodule HelloWeb.RoomChannel do
   use Phoenix.Channel
 
+  require Logger
+
   def join("room:lobby", _message, socket) do
     {:ok, socket}
   end
@@ -10,6 +12,7 @@ defmodule HelloWeb.RoomChannel do
   end
 
   def handle_in("new_msg", %{"body" => body}, socket) do
+    Logger.info("==> Received message: #{body} <==")
     broadcast!(socket, "new_msg", %{body: body, node: to_string(Node.self())})
     {:noreply, socket}
   end
