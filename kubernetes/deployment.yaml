@@ -32,7 +32,6 @@ spec:
                   fieldPath: metadata.namespace
             - name: HOST
               value: hello.jackal.pw
-
 #
 #
 #

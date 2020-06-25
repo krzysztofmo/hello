@@ -104,9 +104,9 @@ ENV \
   LOG_PATH=${APP_DIR}/log \
   HTTP_PORT=8080 \
   HTTPS_PORT=8443 \
-  HOST=localhost \
-  RELEASE_DISTRIBUTION=none \
-  RELEASE_NODE=elixr@elixir \
+#  HOST=localhost \
+#  RELEASE_DISTRIBUTION=none \
+#  RELEASE_NODE=elixr@elixir \
   SECRET_KEY_BASE=XwkLekxMaHijVecozKRk8RdtiM4nYQCHSwY8kP5WgUyla1S1Pfrg5cnHh3R3xsVN
 
 EXPOSE ${HTTP_PORT}
