@@ -81,7 +81,7 @@ RUN echo "export PS1=\$PS1A" >> ~/.bashrc
 
 RUN \
   apk update \
-  && apk add --no-cache bash \
+  && apk add --no-cache bash curl \
   && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
   && echo $TZ > /etc/timezone
 
@@ -99,21 +99,24 @@ WORKDIR ${APP_DIR}
 # Do not run as root
 USER ${APP_USER}
 
+EXPOSE ${HTTP_PORT}
+
+# Copy the release created in the Build Stage
+COPY --from=builder --chown=${APP_USER}:${APP_USER} ${APP_DIR}/_build/${MIX_ENV}/rel/${APP_NAME}/ .
+COPY ./secrets .
+
 # Set up runtime environment
 ENV \
   LOG_PATH=${APP_DIR}/log \
   HTTP_PORT=8080 \
   HTTPS_PORT=8443 \
+  SERVER_CERTFILE=${APP_DIR}/jackal.pw.crt \
+  SERVER_KEYFILE=${APP_DIR}/jackal.pw.key \
 #  HOST=localhost \
 #  RELEASE_DISTRIBUTION=none \
 #  RELEASE_NODE=elixr@elixir \
   SECRET_KEY_BASE=XwkLekxMaHijVecozKRk8RdtiM4nYQCHSwY8kP5WgUyla1S1Pfrg5cnHh3R3xsVN
 
-EXPOSE ${HTTP_PORT}
-#EXPOSE 8080
-
-# Copy the release created in the Build Stage
-COPY --from=builder --chown=${APP_USER}:${APP_USER} ${APP_DIR}/_build/${MIX_ENV}/rel/${APP_NAME}/ .
 
 # Start the application
 CMD ["bin/hello", "start"]

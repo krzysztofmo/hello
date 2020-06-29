@@ -16,6 +16,7 @@ spec:
       labels:
         app: hello-elixir
     spec:
+      serviceAccountName: hello-elixir-sa
       containers:
         - image: gcr.io/hello-elixir-278607/hello-elixir:v1
           imagePullPolicy: Always

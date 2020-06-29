@@ -23,7 +23,8 @@ config :libcluster,
            strategy: Cluster.Strategy.Kubernetes,
            config: [
              mode: :ip,
-             kubernetes_node_basename: "dupa",
+             kubernetes_node_basename: System.get_env("RELEASE_BASENAME"),
+             kubernetes_namespace: System.get_env("NAMESPACE"),
              kubernetes_selector: "app=hello-elixir"
            ],
          ]
