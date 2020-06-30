@@ -17,6 +17,13 @@ spec:
         app: hello-elixir
     spec:
       serviceAccountName: hello-elixir-sa
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - topologyKey: kubernetes.io/hostname
+              labelSelector:
+                matchLabels:
+                  app: hello-elixir
       containers:
         - image: gcr.io/hello-elixir-278607/hello-elixir:v1
           imagePullPolicy: Always

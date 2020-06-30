@@ -81,7 +81,8 @@ RUN echo "export PS1=\$PS1A" >> ~/.bashrc
 
 RUN \
   apk update \
-  && apk add --no-cache bash curl \
+  && apk upgrade --no-cache --update \
+  && apk add --no-cache bash \
   && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
   && echo $TZ > /etc/timezone
 
@@ -116,7 +117,6 @@ ENV \
 #  RELEASE_DISTRIBUTION=none \
 #  RELEASE_NODE=elixr@elixir \
   SECRET_KEY_BASE=XwkLekxMaHijVecozKRk8RdtiM4nYQCHSwY8kP5WgUyla1S1Pfrg5cnHh3R3xsVN
-
 
 # Start the application
 CMD ["bin/hello", "start"]
