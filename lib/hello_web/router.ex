@@ -18,6 +18,7 @@ defmodule HelloWeb.Router do
 
     get "/", PageController, :index
     get "/isItWorking", HealthController, :is_it_working
+    get "/whoAmI", HealthController, :who_am_i
   end
 
   # Other scopes may use custom stacks.

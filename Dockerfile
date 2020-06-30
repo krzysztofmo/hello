@@ -82,7 +82,7 @@ RUN echo "export PS1=\$PS1A" >> ~/.bashrc
 RUN \
   apk update \
   && apk upgrade --no-cache --update \
-  && apk add --no-cache bash \
+  && apk add --no-cache bash curl \
   && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
   && echo $TZ > /etc/timezone
 
