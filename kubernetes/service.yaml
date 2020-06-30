@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  labels:
-    app: hello-elixir
   name: hello-elixir
 spec:
   ports:
-    - port: 80
+    - name: http
+      port: 80
       protocol: TCP
       targetPort: 8080
   selector:
     app: hello-elixir
   type: LoadBalancer
+  sessionAffinity: None

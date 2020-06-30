@@ -40,23 +40,3 @@ spec:
                   fieldPath: metadata.namespace
             - name: HOST
               value: hello.jackal.pw
-#
-#
-#
-#apiVersion: v1
-#kind: Pod
-#metadata:
-#  name: hello-elixir
-#  labels:
-#    app.kubernetes.io/name: hello
-#    app.kubernetes.io/instance: wordpress-abcxzy
-#    app.kubernetes.io/version: "0.0.1"
-#    app.kubernetes.io/component: application
-#    app.kubernetes.io/part-of: kontomatik
-#    app.kubernetes.io/managed-by: helm
-#spec:
-#  containers:
-#    - name: hello-elixir-app
-#      image: gcr.io/hello-elixir-278607/hello-elixir
-#      ports:
-#        - containerPort: 8080
