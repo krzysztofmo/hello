@@ -11,4 +11,5 @@ spec:
   selector:
     app: hello-elixir
   type: LoadBalancer
-  sessionAffinity: None
+  externalTrafficPolicy: Local
+  sessionAffinity: ClientIP
