@@ -1,5 +1,5 @@
 ---
-git_repo: git@github.com:krzysztofmo/hello.git
+git_repo: git@github.com:krzysztofmo/hello-elixir.git
 dir_rsync_cache: .rsync_cache
 dir_deploy_to: /home/webapp/public
 docker_app: hello_elixir_dev_app_1
