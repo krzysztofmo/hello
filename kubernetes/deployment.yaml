@@ -10,7 +10,6 @@ spec:
   selector:
     matchLabels:
       app: hello-elixir
-  strategy: {}
   template:
     metadata:
       labels:
@@ -25,10 +24,10 @@ spec:
                 matchLabels:
                   app: hello-elixir
       containers:
-        - image: gcr.io/hello-elixir-278607/hello-elixir:v1
+#        - image: gcr.io/hello-elixir-278607/hello-elixir:v1
+        - image: krzysztofmo/hello-elixir:v1
           imagePullPolicy: Always
           name: hello-elixir
-          resources: {}
           env:
             - name: POD_IP
               valueFrom:
@@ -39,4 +38,5 @@ spec:
                 fieldRef:
                   fieldPath: metadata.namespace
             - name: HOST
-              value: hello.jackal.pw
+              value: localhost
+#              value: hello.jackal.pw
