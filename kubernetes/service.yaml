@@ -12,7 +12,7 @@ spec:
   selector:
     app: hello-elixir
   type: LoadBalancer
-  externalTrafficPolicy: Local
+#  externalTrafficPolicy: Local
   sessionAffinity: ClientIP
 
 #
