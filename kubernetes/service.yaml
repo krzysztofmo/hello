@@ -11,21 +11,21 @@ spec:
       targetPort: 8080
   selector:
     app: hello-elixir
-  type: NodePort
-#  externalTrafficPolicy: Local
-#  sessionAffinity: ClientIP
+  type: LoadBalancer
+  externalTrafficPolicy: Local
+  sessionAffinity: ClientIP
 
-
----
-kind: Ingress
-apiVersion: networking.k8s.io/v1beta1
-metadata:
-  name: hello-elixir
-spec:
-  rules:
-    - http:
-        paths:
-          - path: /
-            backend:
-              serviceName: hello-elixir
-              servicePort: 8080
+#
+#---
+#kind: Ingress
+#apiVersion: networking.k8s.io/v1beta1
+#metadata:
+#  name: hello-elixir
+#spec:
+#  rules:
+#    - http:
+#        paths:
+#          - path: /
+#            backend:
+#              serviceName: hello-elixir
+#              servicePort: 8080
