@@ -3,6 +3,8 @@ kind: Service
 apiVersion: v1
 metadata:
   name: hello-elixir
+  labels:
+    app: hello-elixir
 spec:
   ports:
     - name: http
