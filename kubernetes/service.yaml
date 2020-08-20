@@ -27,5 +27,5 @@ spec:
         paths:
           - path: /
             backend:
-              serviceName: hello-elixit
+              serviceName: hello-elixir
               servicePort: 8080
