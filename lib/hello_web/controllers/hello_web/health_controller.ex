@@ -9,4 +9,8 @@ defmodule HelloWeb.HealthController do
     text(conn, "You've hit #{Node.self()}")
   end
 
+  def health(conn, _) do
+    text(conn, "Other nodes: #{Node.list() |> Enum.join(", ")}, node cookie: #{Node.get_cookie()}")
+  end
+
 end
