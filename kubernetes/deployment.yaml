@@ -38,5 +38,5 @@ spec:
                 fieldRef:
                   fieldPath: metadata.namespace
             - name: HOST
-              value: localhost
-#              value: hello.jackal.pw
+#              value: localhost
+              value: hello.jackal.pw
