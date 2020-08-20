@@ -13,18 +13,30 @@ config :logger, :console,
        level: :info,
        utc_log: true
 
+#config :libcluster,
+#       topologies: [
+#         hello: [
+#           strategy: Cluster.Strategy.Kubernetes,
+#           config: [
+#             mode: :ip,
+#             kubernetes_node_basename: System.get_env("RELEASE_BASENAME"),
+#             kubernetes_namespace: System.get_env("NAMESPACE"),
+#             kubernetes_selector: "app=hello-elixir"
+#           ],
+#         ]
+#       ]
+
 config :libcluster,
        topologies: [
-         hello: [
-           strategy: Cluster.Strategy.Kubernetes,
+         kx_widget: [
+           strategy: Cluster.Strategy.Epmd,
            config: [
-             mode: :ip,
-             kubernetes_node_basename: System.get_env("RELEASE_BASENAME"),
-             kubernetes_namespace: System.get_env("NAMESPACE"),
-             kubernetes_selector: "app=hello-elixir"
-           ],
+             hosts: System.get_env("CLUSTER_NODES", "") |> String.split(",") |> Enum.map(&String.to_atom/1)
+           ]
          ]
        ]
+
+
 #
 #config :epmdless,
 #       dist_proto_port: System.get_env("DIST_PROTO_PORT")
