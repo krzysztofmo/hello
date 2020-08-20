@@ -11,10 +11,11 @@ defmodule HelloWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug HelloWeb.NodeNameAppenderPlug
   end
 
   scope "/", HelloWeb do
-    pipe_through :browser
+    pipe_through :api
 
     get "/", PageController, :index
     get "/isItWorking", HealthController, :is_it_working
