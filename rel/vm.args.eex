@@ -24,6 +24,6 @@
 
 ## Specifies TLS distribution module for net_kernel
 ## https://erlang.org/doc/apps/ssl/ssl_distribution.html
--proto_dist inet_tls
--ssl_dist_opt server_secure_renegotiate true
--ssl_dist_opt client_secure_renegotiate true
+#-proto_dist inet_tls
+#-ssl_dist_opt server_secure_renegotiate true
+#-ssl_dist_opt client_secure_renegotiate true
