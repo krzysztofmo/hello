@@ -104,18 +104,11 @@ EXPOSE ${HTTP_PORT}
 
 # Copy the release created in the Build Stage
 COPY --from=builder --chown=${APP_USER}:${APP_USER} ${APP_DIR}/_build/${MIX_ENV}/rel/${APP_NAME}/ .
-COPY ./secrets .
 
 # Set up runtime environment
 ENV \
-  LOG_PATH=${APP_DIR}/log \
   HTTP_PORT=8080 \
   HTTPS_PORT=8443 \
-  SERVER_CERTFILE=${APP_DIR}/jackal.pw.crt \
-  SERVER_KEYFILE=${APP_DIR}/jackal.pw.key \
-#  HOST=localhost \
-#  RELEASE_DISTRIBUTION=none \
-#  RELEASE_NODE=elixr@elixir \
   SECRET_KEY_BASE=XwkLekxMaHijVecozKRk8RdtiM4nYQCHSwY8kP5WgUyla1S1Pfrg5cnHh3R3xsVN
 
 # Start the application

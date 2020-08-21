@@ -20,6 +20,12 @@ config :hello, HelloWeb.Endpoint,
   ],
   cache_static_manifest: "priv/static/cache_manifest.json"
 
+config :logger, :console,
+       format: "$date $time $metadata[$level]$levelpad $message\n",
+       metadata: [:request_id, :request_ip, :user_id, :user_agent],
+       level: :info,
+       utc_log: true
+
 #config :hello, HelloWeb.Endpoint, secret_key_base: "${SECRET_KEY_BASE}"
 
 # Do not print debug messages in production
