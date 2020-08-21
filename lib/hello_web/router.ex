@@ -7,6 +7,7 @@ defmodule HelloWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug HelloWeb.NodeNameAppenderPlug
   end
 
   pipeline :api do
@@ -15,7 +16,7 @@ defmodule HelloWeb.Router do
   end
 
   scope "/", HelloWeb do
-    pipe_through :api
+    pipe_through :browser
 
     get "/", PageController, :index
     get "/isItWorking", HealthController, :is_it_working
