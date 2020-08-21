@@ -19,13 +19,14 @@ defmodule HelloWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-    get "/isItWorking", HealthController, :is_it_working
-    get "/whoAmI", HealthController, :who_am_i
-    get "/nodes", NodeController, :index
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", HelloWeb do
-  #   pipe_through :api
-  # end
+   scope "/api", HelloWeb do
+     pipe_through :api
+
+     get "/isItWorking", HealthController, :is_it_working
+     get "/whoAmI", HealthController, :who_am_i
+     get "/nodes", NodeController, :index
+  end
 end
